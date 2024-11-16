@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import RecordRTC from "recordrtc";
 import { Microphone } from "./icon/microphone";
+import WaveDisplay from "./WaveDisplay";
 
 type Recording = {
   audioURL: string;
@@ -113,9 +114,9 @@ export const Record = () => {
       <section>
         <div className="flex flex-col gap-2  audio-cover">
           {recordings.map((recording, index) => (
-            <div className="flex justify-center items-center gap-4" key={recording.id}>
+            <div className="flex justify-center items-center gap-4  border p-1" key={recording.id}>
               <p>最も{index == 0 ? '高い' : '低い'}声</p>
-              <RecordAudioBox recording={recording} />
+              <WaveDisplay audioUrl={recording.audioURL} />
             </div>
           ))}
         </div>
@@ -125,16 +126,17 @@ export const Record = () => {
   );
 };
 
-const RecordAudioBox = ({ recording }: { recording: Recording }) => {
-  return (
-    <article className=" py-2">
-      <div className="p-5 flex justify-center items-center gap-4">
-        <audio src={recording.audioURL} controls />
-        <div className="text-12">{recording.recDate}</div>
-      </div>
-    </article>
-  );
-};
+// const RecordAudioBox = ({ recording }: { recording: Recording }) => {
+//   return (
+//     <article className="py-2  border border-black">
+//       <div className="p-5 flex justify-center items-center gap-4">
+//         <WaveDisplay audioUrl={recording.audioURL} />
+//         <div className="text-12">{recording.recDate}</div>
+//       </div>
+
+//     </article>
+//   );
+// };
 
 
 const RecButton = ({
