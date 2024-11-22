@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import RecordRTC from "recordrtc";
 import { Microphone } from "./icon/microphone";
 import WaveDisplay from "./WaveDisplay";
+import axios from "axios";
 
 type Recording = {
   audioURL: string;
@@ -80,15 +81,12 @@ export const Record = () => {
 
   const handleSubmit = () => {
     console.log("submit")
-    // const path = ''
-    // axios.post(path, {
-    //   high: '',
-    //   low: ''
-    // }).then((res) => {
-    //   console.log(res.data)
-    // }).catch((err) => {
-    //   console.log(err)
-    // })
+    const path = 'http://127.0.0.1:8000'
+    axios.get(path).then((res) => {
+      console.log(res.data)
+    }).catch((err) => {
+      console.log(err)
+    })
   }
 
   return (
