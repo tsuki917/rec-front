@@ -82,7 +82,12 @@ export const Record = () => {
   const handleSubmit = () => {
     console.log("submit")
     const path = 'http://127.0.0.1:8000'
-    axios.get(path).then((res) => {
+    const data = new FormData();
+    data.append('high', recordings[0].blob, 'high.wav'); //'photo'というkeyで保存
+    data.append('low', recordings[1].blob, 'low.wav'); //'photo'というkeyで保存
+    data.append('norm', recordings[2].blob, 'norm.wav'); //'photo'というkeyで保存
+
+    axios.post(path, data, { headers: { 'content-type': 'multipart/form-data' } }).then((res) => {
       console.log(res.data)
     }).catch((err) => {
       console.log(err)
